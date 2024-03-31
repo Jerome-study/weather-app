@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Poppins";
+}
+
+.fw-900 {
+    font-weight: 900 !important;
+}
+
+.fw-800 {
+    font-weight: 800 !important;
+}
+
+.fw-700 {
+    font-weight: 700 !important;
+}
+
+.fw-600 {
+    font-weight: 600 !important;
+}
+
+.fw-500 {
+    font-weight: 500 !important;
+}
+
+.fw-400 {
+    font-weight: 400 !important;
+}
+
+.fw-300 {
+    font-weight: 300 !important;
+}
+
+.height-change {
+   height: 100vh;
+}
+
+.dashboard-border {
+    border-bottom: 1px solid #bcd2d0 ;
+}
+
+.background-dim {
+    backdrop-filter: brightness(25%);
+}
+
+
+@media(min-width: 992px) {
+    .height-change {
+        height: 90vh;
+    }
+    .rounded-lg {
+        border-radius: 30px;
+    }
+    .dashboard-border {
+        border-bottom: unset;
+        border-right: 1px solid #bcd2d0 ;
+    }
+    .dashboard-height {
+        height: 100%;
+    }
+}
