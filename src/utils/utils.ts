@@ -1,38 +1,41 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+export const API_KEY = import.meta.env.VITE_API_KEY;
 
-export const useFetch = () => {
-    const [input, setInput] = useState("");
-    const [city] = useState(localStorage.getItem("data") || "");
-    const [loading, setLoading] = useState(false);
-    const [validate, setValidate] = useState("");
-    const [data, setData] = useState();
+export const convertDate = (timezone : number) => {
+    const localTime = new Date().getTime()
+    const localOffset = new Date().getTimezoneOffset() * 60000
+    const currentUtcTime = localOffset + localTime
+    const cityOffset = currentUtcTime + 1000 * timezone
+    return {
+        time: new Date(cityOffset).toLocaleTimeString(),
+        date: new Date(cityOffset).toDateString()
+    }
+};
 
-    useEffect(() => {
-        const getData = async () => {
-            setValidate("");
-            setLoading(true);
-            try {
-                const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${input || city.split('"').join("")}&mode=json&units=metric&appid=${import.meta.env.VITE_API_KEY}`);
-                setTimeout(() => {
-                    setData(response.data);
-                    localStorage.setItem("data", JSON.stringify(response?.data?.name));
-                    setLoading(false);
-                }, 1000);
-            } catch(error : any) {
-                setTimeout(() => {
-                    setLoading(false)
-                    setValidate(error?.response.data.message);
-                }, 1000)
-            }
-        };
+export const dayOrNight = (sunset : number) => {
+    const result = new Date().valueOf() / 1000 < sunset ? "Day" : "Night"
+    return result;
+};
 
-        if (city || input) {
-            getData();
-        }
 
-    }, [input])
+const condition: Record<string, any> = {
+    "01d": "/clear-day.svg",
+    "01n": "/clear-night.svg",
+    "02d": "/partly-cloudy-day.svg",
+    "02n": "/partly-cloudy-night.svg",
+    "03d": "/cloudy.svg",
+    "03n": "/cloudy.svg",
+    "04d": "/overcast-day.svg",
+    "04n": "/overcast-night.svg",
+    "09d": "/partly-cloudy-day-rain.svg",
+    "09n": "/partly-cloudy-night-rain.svg",
+    "010d": "/rain.svg",
+    "010n": "/rain.svg",
+    "011d": "/thunderstorms-day-rain.svg",
+    "011n": "/thunderstorms-night-rain.svg",
+    "013d": "/snow.svg",
+    "013n": "/snow.svg"
+};
 
-    return { city, data, loading, validate, setValidate, setInput};
-
-}
+export const image = (icon : string) => {
+    return condition[icon];
+};

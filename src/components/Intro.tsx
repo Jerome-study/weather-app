@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useWeather } from "./Context";
 
-export const IntroComponent = ({ loading, validate, setValidate, setInput } : any) => {
+export const IntroComponent = () => {
+    const { loading, validate, setValidate, setInput } : any = useWeather();
     const [city, setCity] = useState<string>("");
 
     const searchCity = () => {;
