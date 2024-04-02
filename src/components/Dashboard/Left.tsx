@@ -2,7 +2,6 @@ import { useWeather } from "../Context";
 import { useState } from "react";
 import { dayOrNight } from "../../utils/utils";
 import { convertDate } from "../../utils/utils";
-import { image } from "../../utils/utils";
 
 export const Left = () => {
     const { data, validate, setValidate, setInput } : any = useWeather();
@@ -22,7 +21,7 @@ export const Left = () => {
                     <button className="btn btn-primary" onClick={searchCity}>Search</button>
                 </div>
                 <div className="text-center">
-                    <img className="w-100" src={`${image(data?.weather[0].icon)}`} alt="weather-icon" style={{ maxWidth: "14rem"}} />
+                    <img className="w-100" src={`/${data?.weather[0].icon}.svg`} alt="weather-icon" style={{ maxWidth: "14rem"}} />
                     <h1 className="display-3 text-secondary fw-800 d-flex justify-content-center">{data?.main?.temp}<span className="display-6 fw-700">°C</span></h1>
                     <p className="text-capitalize fs-3 fw-300">{data?.weather[0].description}</p> 
                 <div>
