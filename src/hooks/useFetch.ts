@@ -14,16 +14,12 @@ export const useFetch = () => {
             setLoading(true);
             try {
                 const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${input || city.split('"').join("")}&mode=json&units=metric&appid=${import.meta.env.VITE_API_KEY}`);
-                setTimeout(() => {
-                    setData(response.data);
-                    localStorage.setItem("data", JSON.stringify(response?.data?.name));
-                    setLoading(false);
-                }, 1000);
+                setData(response.data);
+                localStorage.setItem("data", JSON.stringify(response?.data?.name));
+                setLoading(false);
             } catch(error : any) {
-                setTimeout(() => {
-                    setValidate(error?.response.data.message);
-                    setLoading(false)
-                }, 1000)
+                setValidate(error?.response.data.message);
+                setLoading(false) 
             }
         };
 
